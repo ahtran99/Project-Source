@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour {
+public class EnemyScriptSpider : MonoBehaviour {
 
     public int EnemyHealth = 10;
-    public GameObject TheZombie;
+    public GameObject TheSpider;
 
     void DeductPoints(int DamageAmount)
     {
@@ -16,12 +16,12 @@ public class EnemyScript : MonoBehaviour {
 		if (EnemyHealth <= 0)
         {
             this.GetComponent<ZombieFollow>().enabled = false;
-            TheZombie.GetComponent<Animation>().Play("Dying");
-            EndZombie();
+            TheSpider.GetComponent<Animation>().Play("die");
+            EnemyHealth = 1;
         }
 	}
 
-    IEnumerator EndZombie()
+    IEnumerator EndSpider()
     {
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);

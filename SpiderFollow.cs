@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieFollow : MonoBehaviour
+public class SpiderFollow : MonoBehaviour
 {
     public GameObject ThePlayer;
     public float TargetDistance;
@@ -27,10 +27,10 @@ public class ZombieFollow : MonoBehaviour
             TargetDistance = Shot.distance;
             if (TargetDistance < AllowedRange)
             {
-                EnemySpeed = 0.01f;
+                EnemySpeed = 0.03f;
                 if (AttackTrigger == 0)
                 {
-                    TheEnemy.GetComponent<Animation>().Play("Walking");
+                    TheEnemy.GetComponent<Animation>().Play("walk");
                     transform.position = Vector3.MoveTowards(transform.position, ThePlayer.transform.position, EnemySpeed);
                 }
             }
@@ -38,7 +38,7 @@ public class ZombieFollow : MonoBehaviour
         else
         {
             EnemySpeed = 0;
-            TheEnemy.GetComponent<Animation>().Play("Idle");
+            TheEnemy.GetComponent<Animation>().Play("idle");
         }
 
         if (AttackTrigger == 1)
@@ -48,7 +48,7 @@ public class ZombieFollow : MonoBehaviour
                 StartCoroutine(EnemyDamage());
             }
             EnemySpeed = 0;
-            TheEnemy.GetComponent<Animation>().Play("Attacking");
+            TheEnemy.GetComponent<Animation>().Play("attack");
         }
     }
 
@@ -66,7 +66,7 @@ public class ZombieFollow : MonoBehaviour
     {
         IsAttacking = 1;
         PainSound = Random.Range(1, 4);
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(0.4f);
         ScreenFlash.SetActive(true);
         GlobalHealth.PlayerHealth -= 2;
         if (PainSound == 1)
@@ -83,7 +83,7 @@ public class ZombieFollow : MonoBehaviour
         }
         yield return new WaitForSeconds(0.05f);
         ScreenFlash.SetActive(false);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.75f);
         IsAttacking = 0;
     }
 }

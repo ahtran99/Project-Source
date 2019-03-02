@@ -7,8 +7,18 @@ public class HandGunDamage : MonoBehaviour {
     public int DamageAmount = 5;
     public float TargetDistance;
     public float AllowedRange = 15.0f;
-	
-	void Update () {
+
+    public RaycastHit hit;
+    public GameObject TheBullet;
+    public GameObject TheBlood;
+    public GameObject TheBloodGreen;
+
+    private void Start()
+    {
+        DamageAmount = 5;
+    }
+
+    void Update () {
         if (GlobalAmmo.LoadedAmmo >= 1)
         {
             if (Input.GetButtonDown("Fire1"))
@@ -20,6 +30,27 @@ public class HandGunDamage : MonoBehaviour {
                     if (TargetDistance < AllowedRange)
                     {
                         Shot.transform.SendMessage("DeductPoints", DamageAmount, SendMessageOptions.DontRequireReceiver);
+                        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
+                        {
+                            if (hit.transform.tag == "Zombie")
+                            {
+                                Instantiate(TheBlood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                            }
+                            if (hit.transform.tag == "ZombieHead")
+                            {
+                                DamageAmount = 10;
+                                Instantiate(TheBlood, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                            }
+                            if (hit.transform.tag == "Spider")
+                            {
+                                Instantiate(TheBloodGreen, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                            }
+                            if (hit.transform.tag == "Untagged")
+                            {
+                                Instantiate(TheBullet, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                            }
+                        }
+                        Shot.transform.SendMessage("DeductPoints", DamageAmount);
                     }
                 }
             }

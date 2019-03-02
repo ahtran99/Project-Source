@@ -61,8 +61,8 @@ public class HandgunReloading : MonoBehaviour {
     void ActionReload()
     {
         GunComponent.enabled = true;
-        CrossObject.SetActive(false);
-        MechanicsObject.SetActive(false);
+        CrossObject.SetActive(true);
+        MechanicsObject.SetActive(true);
         ReloadSound.Play();
         GetComponent<Animation>().Play("HandgunReload");
     }
