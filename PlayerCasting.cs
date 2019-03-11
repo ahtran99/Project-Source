@@ -13,6 +13,7 @@ public class PlayerCasting : MonoBehaviour {
         {
             ToTarget = hit.distance;
             DistanceFromTarget = ToTarget;
+            PlayerPrefs.SetFloat("TheCasting", DistanceFromTarget);
         }
 	}
 }

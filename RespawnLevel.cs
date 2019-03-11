@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CredToMenu : MonoBehaviour
+public class RespawnLevel : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ReturnToMenu());
-    }
-
-    IEnumerator ReturnToMenu()
-    {
-        yield return new WaitForSeconds(12);
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(1);
     }
 }

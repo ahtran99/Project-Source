@@ -17,7 +17,8 @@ public class EnemyScriptSpider : MonoBehaviour {
         {
             this.GetComponent<ZombieFollow>().enabled = false;
             TheSpider.GetComponent<Animation>().Play("die");
-            EnemyHealth = 1;
+            StartCoroutine(EndSpider());
+            //EnemyHealth = 1;
         }
 	}
 
