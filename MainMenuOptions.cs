@@ -12,6 +12,6 @@ public class MainMenuOptions : MonoBehaviour
 
     public void CreditScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 }

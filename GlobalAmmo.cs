@@ -16,6 +16,7 @@ public class GlobalAmmo : MonoBehaviour {
 	void Update () {
         InternalAmmo = CurrentAmmo;
         InternalLoaded = LoadedAmmo;
+        PlayerPrefs.SetInt("AmmoLevel", CurrentAmmo);
         AmmoDisplay.GetComponent<Text>().text = "" + InternalAmmo;
         LoadedDisplay.GetComponent<Text>().text = "" + LoadedAmmo;
 	}
